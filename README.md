@@ -24,7 +24,7 @@ en gros il faut:
    - faire une moyenne par recup des donnée
    
    
-   rendre le bas jolie
+   - rendre le bas jolie
    
    
   - faire la doc
