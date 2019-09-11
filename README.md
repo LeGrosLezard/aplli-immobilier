@@ -10,3 +10,4 @@ en gros il faut:
   - réponse google map
   - estimation du prix de la meme rue
   - avec une moyenne par le nombre de piece et le type (maison ou appartement)
+  - faire la doc
