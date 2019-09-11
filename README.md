@@ -12,7 +12,7 @@ en gros il faut:
   - faire une auto complétion via la database
     - ca je sais pas encore mais si le type écrit un truk faire un like en ajax a chaque on saisit(ca va ramer donc au pire pas grave)
     
-  - l'utilisateur saisi un input
+
   - réponse google map
     - AJAX on récupere lat et long dans la database
     
