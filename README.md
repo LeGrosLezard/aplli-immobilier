@@ -9,4 +9,4 @@ en gros il faut:
   - l'utilisateur saisi un input
   - réponse google map
   - estimation du prix de la meme rue
-  - avec une moyenne par le nombre de piece
+  - avec une moyenne par le nombre de piece et le type (maison ou appartement)
