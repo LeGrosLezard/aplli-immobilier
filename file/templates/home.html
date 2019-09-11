@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Immobilier</title>
+
+        <! -- Importing CDN Bootstrap -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+        <link href="/static/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+    </head>
+
+    <body>
+
+        <! -- FIRST Section -->
+        <section id="masthead">
+            <div id="div_title">
+                <h1>La recherche immobiliaire <p><strong>Avec Oxoo</strong></p></h1>
+                <h2>Notre métier, notre passion n'attendez plus, faites-nous confiance</h2>
+                
+            </div>
+        </section>
+
+
+        <! -- SECOND Section -->
+        <section id="recherche">
+
+
+            <! -- ONE column for map / ONE column for result of research -->
+            <div class="container">
+              <div class="row">
+
+                <! -- MAP DIV -->
+                <div class="col-sm">
+                    <div id="div_map"></div>
+                </div>
+
+                <! -- RESULT DIV -->
+                <div class="col-sm">
+                    <div id="div_search">
+
+                        <! -- SEARCHING INPUT DIV -->
+                        <h2>Votre recherche, notre recherche <em><span id="logo_span">avec Axoo</span></em></h2>
+                        <input type="text" placeholder="Votre recherche..." id="entrance_address">
+                        <button type="button" class="btn btn-primary" id="button_valid_search">Valider</button>
+
+                        <! -- LOADING DIV -->
+                        <div id="loading"><img src="/static/picture/home/loading.gif" id="loading_gif"></div>
+                        <div id="text_chargement"><em>C h a r g e m e n t</em></div>
+
+                        <! -- TEXT RESULT -->
+                        <div id="text_search">
+                            <h2>Adresse</h2>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <p>LOGO 1 prix appartement</p>
+                                </div>
+                                <div class="col-sm">
+                                    <p>LOGO 2 prix maison</p>
+                                </div>
+                            </div>
+
+                            <! -- SEARCHING INPUT DIV -->
+                            <div id="div_search2">
+                                <input type="text" placeholder="Votre recherche..." id="entrance_address">
+                                <button type="button" class="btn btn-primary" id="button_valid_search">Valider</button>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    
+                  
+                </div>
+              </div>
+            </div>
+
+
+
+
+
+
+
+        
+            
+        </section>
+    </body>
+
+
+
+
+
+    <! -- Importing CDN Jquerry -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <! -- Importing GOOGLE MAP API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBqJf5bBiufgiWCK34KcdmPt4Zhsp4oRCc&callback=initMap"
+    async defer></script>
+</html>
+
+
+<style>
+
+    /* TAG */
+    body{
+        text-align:center;
+    }
+    h2{
+        margin-top:20px;
+        font-size:1.5em;
+    }
+    ::-webkit-input-placeholder {
+       font-style: italic;
+    }
+
+
+ /* MASTHEAD */
+ #masthead{
+     min-height:50rem;
+     position:relative;
+     display:table;
+     width:100%;
+     height:auto;
+     padding-top:8rem;
+     padding-bottom:8rem;
+     background:-webkit-gradient(
+         linear,left top,
+         right top,
+         from(rgba(255,255,255,.1)),
+         to(rgba(255,255,255,.1))),
+         url(/static/home/home.jpg);
+         background:linear-gradient(90deg,rgba(255,255,255,.1) 0,rgba(255,255,255,.1) 100%),
+         url(/static/home/home.jpg);background-position:center center;
+         background-repeat:no-repeat;
+         background-size:cover
+     }
+     .masthead h1{
+         font-size:4rem;margin:0;padding:0
+      }
+      @media (min-width:992px){
+          .masthead{height:100vh
+      }
+      .masthead h1{
+          font-size:5.5rem
+      }
+  }
+
+
+
+  /* DIV MAP */
+  #div_map{
+    height:400px;
+    background:url("/static/picture/home/house.jpg")
+  }
+
+ /* DIV RESEARCH */
+ #div_title{
+    margin-top:100px;
+  }
+ #recherche{
+    height:600px;
+    margin-top:100px;
+  }
+  #div_search{
+    height:400px;
+  }
+  #entrance_address{
+    margin-top:50px;
+    width:100%;
+    text-align:center;
+    height:7%;
+    font-size:1.5em;
+  }
+  #logo_span{
+    font-size:0.9em;
+  }
+  #button_valid_search{
+    font-size:1.4em;
+    margin-top:3.5%;
+  }
+
+
+  /* DIV LOADING RESEARCH */
+  #loading{
+    width:100%
+    height:auto;
+  }
+  #loading_gif{
+    width:30%;
+    height:auto;
+    margin:0;
+    display:none;
+  }
+  #text_chargement{
+    margin-top:-30px;
+    display:none;
+  }
+
+  /* DIV RESEARCH 2 */
+  #text_search{
+    margin-top:4em;
+    width:100%;
+    height:auto;
+  }
+  #div_search2{
+    margin-top:5em;
+  }
+                 
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
