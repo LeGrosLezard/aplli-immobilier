@@ -1,6 +1,6 @@
 # aplli-immobilier
 
-oh je comprend rien, j'ai cru qu'on me demandé de faire ca MAIS nan enfaite grr bon au moins c cool ^^
+oh je comprend rien, j'ai cru qu'on me demandé de faire ca MAIS nan enfaite grr bon au moins c cool ^^ merde pcque le bas est pas beau
 
 en gros il faut:
 
@@ -22,6 +22,10 @@ en gros il faut:
     
   - avec une moyenne par le nombre de piece et le type (maison ou appartement)
    - faire une moyenne par recup des donnée
+   
+   
+   rendre le bas jolie
+   
    
   - faire la doc
     - installation (csv, gzip ...)
