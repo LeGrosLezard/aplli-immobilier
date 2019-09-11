@@ -6,9 +6,8 @@ en gros il faut:
 
   - finir de remplir la database
   
-    -attendre le chargement (trop chiant)
-    
-    -supprimer les data qui se repetent
+    - attendre le chargement (trop chiant)
+    - supprimer les data qui se repetent
     
   - faire une auto complétion via la database
     - ca je sais pas encore mais si le type écrit un truk faire un like en ajax a chaque on saisit(ca va ramer donc au pire pas grave)
