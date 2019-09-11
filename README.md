@@ -6,7 +6,8 @@ en gros il faut:
 
   - finir de remplir la database
   
-    -attendre le chargement
+    -attendre le chargement (trop chiant)
+    
     -supprimer les data qui se repetent
     
   - faire une auto complétion via la database
