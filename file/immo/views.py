@@ -10,7 +10,7 @@ from .config_database.config import USER
 from .config_database.config import HOST
 from .config_database.config import PASSWORD
 
-
+import time
 def encoding_to(word):
     """Here we encoding our entrance
     to windows-1252. Our database has encoding
@@ -55,15 +55,19 @@ def search_data_by_community(entrance, infra):
     cur = conn.cursor()
 
     if infra == "":
-        cur.execute("""SELECT  * FROM Immobilier
-                    WHERE LOWER(communauty) = LOWER(%s)""",
-                    (entrance, ))
+        cur.execute("""SELECT property_value, type_infra, number_room,
+                      area, addresse1, addresse2, postal_code,
+                      communauty, lat, long FROM Immobilier
+                      WHERE LOWER(communauty) = LOWER(%s)""",
+                      (entrance, ))
 
     else:
-        cur.execute("""SELECT  * FROM Immobilier
-                    WHERE LOWER(communauty) = LOWER(%s)
-                    AND LOWER(type_infra) = LOWER(%s)""",
-                    (entrance, infra))
+        cur.execute("""SELECT property_value, type_infra, number_room,
+                      area, addresse1, addresse2, postal_code,
+                      communauty, lat, long FROM Immobilier
+                      WHERE LOWER(communauty) = LOWER(%s)
+                      AND LOWER(type_infra) = LOWER(%s)""",
+                      (entrance, infra))
 
     
     liste = cur.fetchall()
@@ -83,6 +87,10 @@ def home(request):
 
         search = encoding_to(data)#encoding data
         out = search_data_by_community(search, infra)#recup data from database
+
+        if out == []:
+            pass
+        
         return HttpResponse(out)
 
     return render(request, 'home.html')
