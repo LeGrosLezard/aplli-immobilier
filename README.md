@@ -5,6 +5,14 @@ oh je comprend rien, j'ai cru qu'on me demandé de faire ca MAIS nan enfaite grr
 en gros il faut:
 
 
+  - le mec saisit son code postal, si on en trouve un on dit ok sinon on va scrapper
+
+  - on a pas beaucoup de data on sort ce que l'on
+  
+    - par exemple gyé-sur-seine on a que 4 données. On dit sur le département en maison vaut 50 000 euro
+    
+    - on donne la possibilité de voir le prix value sur le code postal
+
   - faire une auto complétion via la database
     - ca je sais pas encore mais si le type écrit un truk faire un like en ajax a chaque on saisit(ca va ramer donc au pire pas grave)
     
