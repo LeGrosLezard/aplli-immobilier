@@ -10,17 +10,15 @@ en gros il faut:
   - faire une auto complétion via la database <em><strong>(peut etre ok)</strong></em>
     - ca je sais pas encore mais si le type écrit un truk faire un like en ajax a chaque on saisit(ca va ramer donc au pire pas grave)
 
-  
-  - avec une moyenne par le nombre de piece et le type (maison ou appartement) <em><strong>(en cours)</strong></em>
-   - faire une moyenne par recup des donnée
-   
   - si avant ce soir ok, faire selon le code postal tous les départements et faire des zones de prix <em><strong>(non)</strong></em>
-    
     - dire au détail si c'est vendu ou non par scrappage ou API <em><strong>(non)</strong></em>
    
    
    - rendre le bas jolie <em><strong>(non)</strong></em>
    
+   
+  - refaire la fonction
+ 
    
   - faire la doc 
     - installation (csv, gzip ...)
