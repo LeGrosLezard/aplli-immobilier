@@ -47,7 +47,7 @@ def class_sql_to_str(liste):
 def search_data_by_community(entrance, infra):
     """We search the entrance into our database
     by communauty"""
-
+    print(entrance)
     conn = psycopg2.connect(database=DATABASE,
                             user=USER,
                             host=HOST,
@@ -69,7 +69,7 @@ def search_data_by_community(entrance, infra):
                       AND LOWER(type_infra) = LOWER(%s)""",
                       (entrance, infra))
 
-    
+    liste = []
     liste = cur.fetchall()
     liste_treat = class_sql_to_str(liste)
 
@@ -89,7 +89,7 @@ def home(request):
         out = search_data_by_community(search, infra)#recup data from database
 
         if out == []:
-            pass
+            return HttpResponse("Oups nous n'avons pas donnée voir nos données ?")
         
         return HttpResponse(out)
 
