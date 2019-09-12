@@ -17,16 +17,14 @@ def encoding_to(word):
     charactere so we searching into this code"""
 
     word = word.encode("utf-8").decode("windows-1252")
-
     return word
 
 def decoding_to(word):
-    """Here we encoding our entrance
+    """Here we decoding our entrance
     to windows-1252. Our database has encoding
     charactere so we searching into this code"""
 
     word = word.encode("windows-1252").decode("utf-8")
-
     return word
 
 def class_sql_to_str(liste):
