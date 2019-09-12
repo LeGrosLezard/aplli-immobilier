@@ -1,7 +1,6 @@
 # aplli-immobilier
 
-l'utilisateur rentre une commune on dit le prix de l'appartement ou de la maison et voila si on a les données
-
+au pire mettre les deux versions une avec ce code l'aute avec jsonify
 
 en gros il faut:
 
