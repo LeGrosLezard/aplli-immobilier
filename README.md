@@ -17,9 +17,6 @@ en gros il faut:
    - rendre le bas jolie <em><strong>(non)</strong></em>
    
    
-  - refaire la fonction <em><strong>(en cours)</strong></em>
- 
-   
   - faire la doc 
     - installation (csv, gzip ...)
     - lancement dabord database
