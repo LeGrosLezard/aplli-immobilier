@@ -28,7 +28,7 @@ en gros il faut:
    
   - si avant ce soir ok, faire selon le code postal tous les départements et faire des zones de prix
     
-    - dire au détail si c'est vendu ou non par scrappage
+    - dire au détail si c'est vendu ou non par scrappage ou API
    
    
    - rendre le bas jolie
