@@ -53,22 +53,30 @@
                             </div>
                         </div>
 
-                        <input type="text" placeholder="Votre recherche..." id="entrance_address">gyé-sur-seine
+                        <input type="text" placeholder="Votre recherche de commune..." id="entrance_address">gyé-sur-seine  Bourg-en-Bresse
                         <button type="button" class="btn btn-primary" id="button_valid_search">Valider</button>
 
                         <! -- LOADING DIV -->
-                        <div id="loading"><img src="/static/picture/home/loading.gif" id="loading_gif"></div>
-                        <div id="text_chargement"><em>C h a r g e m e n t</em></div>
+                        <div id="loading">
+                            <div><img src="/static/picture/home/loading.gif" id="loading_gif"></div>
+                            <div id="text_chargement"><em>C h a r g e m e n t</em></div>
+                        </div>
 
                         <! -- TEXT RESULT -->
                         <div id="text_search">
                             <h2>Adresse</h2>
                             <div class="row">
                                 <div class="col-sm">
-                                    <p>LOGO 1 prix appartement</p><p id="appartement_prix"></p>
+                                    <p><img src="/static/picture/home/appart.png" id="appart"></p>
+                                    <p id="appartement_prix"></p>
+                                    <p id="piece_appart"></p>
+                                    <p id="area_appart"></p>
                                 </div>
                                 <div class="col-sm">
-                                    <p>LOGO 2 prix maison</p><p id="maison_prix"></p>
+                                    <p> <img src="/static/picture/home/house.png" id="house"></p>
+                                    <p id="maison_prix"></p>
+                                    <p id="piece_maison"></p>
+                                    <p id="area_maison"></p>
                                 </div>
                             </div>
 
@@ -96,6 +104,8 @@
         
             
         </section>
+        <div>Icons made by <a href="https://www.flaticon.com/authors/nhor-phai" title="Nhor Phai">Nhor Phai</a> from <a href="https://www.flaticon.com/"title="Flaticon">www.flaticon.com</a></div>
+        <div>Icons made by <a href="https://www.flaticon.com/authors/dave-gandy" title="Dave Gandy">Dave Gandy</a> from <a href="https://www.flaticon.com/"             title="Flaticon">www.flaticon.com</a></div>
     </body>
 
 
@@ -193,22 +203,28 @@
     font-size:1.4em;
     margin-top:3.5%;
   }
-
+  #house{
+    width:30px;
+    height:auto;
+  }
+  #appart{
+    width:30px;
+    height:auto;
+  }
 
   /* ----------------------------------------DIV LOADING RESEARCH */
   #loading{
     width:100%
     height:auto;
+    display:none;
   }
   #loading_gif{
     width:30%;
     height:auto;
     margin:0;
-    display:none;
   }
   #text_chargement{
     margin-top:-30px;
-    display:none;
   }
 
   /* DIV RESEARCH 2 */
@@ -228,7 +244,7 @@
 
 <script>
 
-    //***************************GLOBAL VAR********************************
+    //***************************GLOBAL VAR*****************************************
     var varTypeInfra = "";
     var treatData = [];
     lattitude_data = 0;
@@ -272,10 +288,10 @@
           else{
               loading_undisplay();
               raise_background(); // delete picture
-              treatment_data_http(data)//treat data from ajax return
-              recup_data_ajax()//recup lat and long data for google map
-              initMap(lattitude_data, longitude_data); //put google map
-              display_map_end_ajax()//Displaying map
+              treatment_data_http(data)// treat data from ajax return
+              recup_data_ajax()// recup lat and long data for google map
+              initMap(lattitude_data, longitude_data); // put google map
+              display_map_end_ajax()// Displaying map
               display_none_input_one(); // displaying none the first input
               result_display(); // displaying text of result
           };
@@ -284,7 +300,7 @@
 
 
 
-    //*************************DURING AJAX CALL***************************
+    //*************************DURING AJAX CALL**************************************
     
     //WE DISPLAY THE TEXT OF RESULT
     function result_display(){
@@ -323,9 +339,8 @@
         document.getElementById("infra").style.display = "none";
     }
 
-    //*************************END AJAX CALL***************************
 
-
+    //*************************END AJAX CALL*******************************************
     //WE ENTRANCE DATA FROM SQL INTO AN ARRAY
     function treatment_data_http_step_ONE(data){
 
@@ -348,26 +363,54 @@
     };
 
 
+    //PART OF LATITUDE AND LONGITUDE
+    function lat_and_long(counter, treatData){
+        
+        //DATA FOR LATTITUDE AND LONGITUDE
+        if(counter == 9){
+            lattitude_data = parseFloat(treatData)
+        }
+        if(counter == 10){
+            longitude_data = parseFloat(treatData)
+        }
+    };
+
+
+
     //RECUP DATA FROM treatData TREATED
     function recup_data_ajax(){
 
-        var len_maison = 0;
-        var maison = 0;
+        var len_maison = 0
+        var maison = 0
+        var len_appartement = 0
+        var appartement = 0
 
-        var len_appartement = 0;
-        var appartement = 0;
+        var len_room_house = 0
+        var room_house = 0
+
+        var len_room_appart = 0
+        var room_apart = 0
+
+        var len_area_house = 0
+        var area_house = 0
+        var len_area_appart = 0
+        var area_appart = 0
+
+
+        var k_maison = false
+        var k_appart = false
 
         var var_w = 0
         counter = 0
 
         for(var i = 0; i < treatData.length; i++){
             for(var j = 0; j < treatData[i].length; j++){
-                if(counter == 9){
-                    lattitude_data = parseFloat(treatData[i][j])
-                }
-                if(counter == 10){
-                    longitude_data = parseFloat(treatData[i][j])
-                }
+
+                //PART OF LATITUDE AND LONGITUDE
+                lat_and_long(counter, treatData[i][j])
+
+
+                //DATA FOR PRICE OF IMMOVABLE
                 if(counter == 0){
                     var_w += parseInt(treatData[i][j])
                 }
@@ -375,30 +418,69 @@
                     maison += var_w
                     len_maison += 1
                     var_w = 0
+                    k_maison = true
                 }
-                else if(counter == 1 && treatData[i][j] === " Appartement"){
+                else if(counter == 1 && treatData[i][j] == " Appartement"){
                     appartement += var_w
                     len_appartement += 1
                     var_w = 0
+                    k_appart = true
                 }
-            
-                if(counter == 10){
+
+                //NUMBER OF ROOM
+                if(counter == 2){
+                    if(k_appart == true){
+                        len_room_appart += 1
+                        room_apart += parseInt(treatData[i][j])
+                    }
+                    else if(k_maison == true){
+                        len_room_house += 1
+                        room_house += parseInt(treatData[i][j])
+                    }
+                }
+
+                //AREA OF THE STRUCTURE
+                if(counter == 3){
+                    if(k_appart == true){
+                        len_area_appart += 1
+                        area_appart += parseInt(treatData[i][j])
+                        k_appart = false
+                    }
+                    else if(k_maison == true){
+                        len_area_house += 1
+                        area_house += parseInt(treatData[i][j])
+                        k_maison = false
+                    }
+                }
+
+
+                if(counter == 9){
                     counter = -1
+                    console.log("stoip")
                 }
                 counter += 1
+                console.log(treatData[i][j])
             }
         }
-        console.log(maison/len_maison)
+
+        document.getElementById("appartement_prix").innerHTML = Math.round(appartement/len_appartement) + " euros en moyenne"
+        document.getElementById("maison_prix").innerHTML = Math.round(maison/len_maison) + " euros en moyenne"
+
+        document.getElementById("piece_appart").innerHTML = Math.round(room_apart/len_room_appart) + " pièce en moyenne"
+        document.getElementById("piece_maison").innerHTML = Math.round(room_house/len_room_house) + " pièce en moyenne"
+
+        document.getElementById("area_appart").innerHTML = Math.round(area_appart/len_area_appart) + " mètre carré en moyenne"
+        document.getElementById("area_maison").innerHTML = Math.round(area_house/len_area_house) + " mètre carré en moyenne"
+        
     };
-    
+
+
 
     //HERE WE TRAITING HTTPRESPONSE
     function treatment_data_http(data){
         treatment_data_http_step_ONE(data)
-        document.getElementById('test').innerHTML = treatData;
-
-
     };
+
     function display_map_end_ajax(){
         document.getElementById("map").style.display = "block";
     };
@@ -406,7 +488,7 @@
 
 
 
-    //*************************MAP INITIALISATION*************************
+    //*************************MAP INITIALISATION***********************************
     function initMap(lattitude_data, longitude_data){
         var options = {
             zoom:15,
@@ -417,7 +499,7 @@
 
 
 
-    //******************AJAX PROTECTION********************
+    //******************AJAX PROTECTION**********************************************
     function getCookie(name) {
         var cookieValue = null;
         if (document.cookie && document.cookie !== '') {
@@ -435,7 +517,7 @@
     }
     var csrftoken = getCookie('csrftoken');
 
-    //******************AJAX PROTECTION*********************
+
     function csrfSafeMethod(method) {
         // these HTTP methods do not require CSRF protection
         return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
