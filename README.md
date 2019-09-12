@@ -5,11 +5,11 @@ oh je comprend rien, j'ai cru qu'on me demandé de faire ca MAIS nan enfaite grr
 en gros il faut:
 
 
-  - le mec saisit son code postal, <em><strong>(peut etre ok)</strong></em>
+  - le mec saisit son code postal, <em><strong>(en cours)</strong></em>
   
     -si on en trouve un on dit ok sinon on va scrapper <em><strong>(non)</strong></em>
 
-  - on a pas beaucoup de data on sort ce que l'on <em><strong>(peut etre ok)</strong></em>
+  - on a pas beaucoup de data on sort ce que l'on <em><strong>(en cours)</strong></em>
   
     - par exemple gyé-sur-seine on a que 4 données. On dit sur le département en maison vaut 50 000 euro
     
