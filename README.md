@@ -1,6 +1,7 @@
 # aplli-immobilier
 
-oh je comprend rien, j'ai cru qu'on me demandé de faire ca MAIS nan enfaite grr bon au moins c cool ^^ merde pcque le bas est pas beau
+l'utilisateur rentre une commune on dit le prix de l'appartement ou de la maison et voila si on a les données
+
 
 en gros il faut:
 
