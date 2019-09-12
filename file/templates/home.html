@@ -423,7 +423,8 @@
         }
     };
 
-    //WE DISPLAY THE RESULT WE GET ------------------------***************---> recup_data_ajax()
+
+    //WE DISPLAY THE RESULT WE GET -----------------------------------------> recup_data_ajax()
     function display_result(appartement, len_appartement, maison, len_maison,
                             room_apart, len_room_appart, room_house, len_room_house,
                             area_appart, len_area_appart, area_house, len_area_house,
@@ -599,10 +600,29 @@
 
 
 
+
+
+
     //*************************SECOND CALL AJAX***********************************
+    //UNINDISPLAY RESULT
+    function unindisplay_last_result(){
+        document.getElementById("appartement_prix").innerHTML = "";
+        document.getElementById("maison_prix").innerHTML = "";
+
+        document.getElementById("piece_appart").innerHTML = "";
+        document.getElementById("piece_maison").innerHTML = ""
+
+        document.getElementById("area_appart").innerHTML = "";
+        document.getElementById("area_maison").innerHTML = "";
+        document.getElementById("dress").innerHTML = "";
+
+    }
+
+    
     //AJAX CALL THE SECOND INPUT
     $("#button_valid_search2").on("click", function(e){
       treatData = []
+      unindisplay_last_result()//we delete last div
       var recup = recup_data("entrance_address2"); // Recup value from input
       loading_display(); // displaying loading logo
       raise_infra();//display infra inputs
