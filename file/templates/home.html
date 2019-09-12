@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -40,7 +41,18 @@
 
                         <! -- SEARCHING INPUT DIV -->
                         <h2>Votre recherche, notre recherche <em><span id="logo_span">avec Axoo</span></em></h2>
-                        <input type="text" placeholder="Votre recherche..." id="entrance_address">
+
+                        <! -- TYPE OF INFRA -->
+                        <div class="row">
+                            <div class="col-sm">
+                                <input type="button" value="Maison" onclick="type_infra('maison')">
+                            </div>
+                            <div class="col-sm">
+                                <input type="button" value="Appartement" onclick="type_infra('appartement')">
+                            </div>
+                        </div>
+
+                        <input type="text" placeholder="Votre recherche..." id="entrance_address">gyé-sur-seine
                         <button type="button" class="btn btn-primary" id="button_valid_search">Valider</button>
 
                         <! -- LOADING DIV -->
@@ -75,7 +87,7 @@
             </div>
 
 
-
+            <div id="test"></div>
 
 
 
@@ -99,7 +111,7 @@
 
 <style>
 
-    /* TAG */
+    /* --------------------------------------------TAG */
     body{
         text-align:center;
     }
@@ -112,7 +124,7 @@
     }
 
 
- /* MASTHEAD */
+ /* -----------------------------------------------MASTHEAD */
  #masthead{
      min-height:50rem;
      position:relative;
@@ -145,13 +157,13 @@
 
 
 
-  /* DIV MAP */
+  /* -------------------------------------------------------DIV MAP */
   #div_map{
     height:400px;
     background:url("/static/picture/home/house.jpg")
   }
 
- /* DIV RESEARCH */
+ /* ---------------------------------------------------DIV RESEARCH */
  #div_title{
     margin-top:100px;
   }
@@ -178,7 +190,7 @@
   }
 
 
-  /* DIV LOADING RESEARCH */
+  /* ----------------------------------------DIV LOADING RESEARCH */
   #loading{
     width:100%
     height:auto;
@@ -211,25 +223,36 @@
 
 <script>
 
+    //***************************GLOBAL VAR********************************
+    var varTypeInfra = "";
+    var treatData = [];
+
 
 
     //***************************USER PRESSED BUTTON********************************
-    //WE RECUP DATA FROM INPUT
+    //WE RECUP IF USER SEARCH HOUSE OR APPARTEMENT
+    function type_infra(type){
+        varTypeInfra = type;
+    };
+
+
+    //WE RECUP DATA INFRA FROM INPUT
     function recup_data(){
         var recuperation = document.getElementById("entrance_address").value;
         return recuperation;
     };
 
 
-    //***************************AJAX FUNCTIONS********************************
+    //*********************************AJAX FUNCTIONS********************************
     //AJAX CALL FOR MAP
     $("#button_valid_search").on("click", function(e){
       var recup = recup_data(); // Recup value from input
       loading_display(); // displaying loading logo
       $.ajax({
         data:{
+          'infra':varTypeInfra,
           'data':recup,
-          csrfmiddlewaretoken:'{{ csrf_token }}'
+          csrfmiddlewaretoken:'{{csrf_token}}'
         },
           type:"POST",
       })
@@ -240,33 +263,8 @@
           else{
               loading_undisplay();
               raise_background(); // delete picture
-              initMap(lattitude_data, longitude_data); //put google map
-              display_none_input_one(); // displaying none the first input
-              result_display(); // displaying text of result
-          };
-      });
-    });
-
-
-    //AJAX CALL FOR MAP IF USER DOINF AN OTHER SEARCH
-    $("#button_valid_search").on("click", function(e){
-      var recup = recup_data(); // Recup value from input
-      loading_display(); // displaying loading logo
-      $.ajax({
-        data:{
-          'data':recup,
-          csrfmiddlewaretoken:'{{ csrf_token }}'
-        },
-          type:"POST",
-      })
-      .done(function(data){
-          if (data.error){
-              {}
-          }
-          else{
-              loading_undisplay();
-              raise_background(); // delete picture
-              initMap(lattitude_data, longitude_data); //put google map
+              treatment_data_http(data)
+              //initMap(lattitude_data, longitude_data); //put google map
               display_none_input_one(); // displaying none the first input
               result_display(); // displaying text of result
           };
@@ -280,36 +278,67 @@
     //WE DISPLAY THE TEXT OF RESULT
     function result_display(){
         document.getElementById("text_search").style.display = "block";
-    }
+    };
 
-    //WE UNDISPLAY THE FIRST INPUT
+    //WE UNDISPLAY THE FIRST INPUT AND BUTTON
     function display_none_input_one(){
         document.getElementById("entrance_address").style.display = "none";
-    }
+        document.getElementById("button_valid_search").style.display = "none";
+    };
 
     //WE WE DISPLAY THE LOATDING LOGO
     function loading_display(){
         document.getElementById("loading").style.display = "block";
-    }
+    };
 
     //WE UNDISPLAY LOADING
     function loading_undisplay(){
         document.getElementById("loading").style.display = "none";
-    }
+    };
 
     //WE RECUP LAT AND LONG FROM AJAX RESPONSE
     function treatment_data_lat_lng(){
         
-    }
+    };
 
     //WE DELETE PICTURE TO GOOGLE MAP
     function raise_background(){
         //Raise the current div (background picture)
         document.getElementById("div_map").style.display = "none";
-    }
+    };
 
     //*************************END AJAX CALL***************************
 
+    //FIRST PART OF ++++++++++treatment_data_http++++++++++
+
+    //we entrance it on an array
+    function treatment_data_http_step_ONE(data){
+        console.log(data)
+        
+        var increment = ""
+        var list = []
+        for(var i = 0; i < data.length + 1; i++){
+            if(data[i] == "[" || data[i] == "]" || data[i]  == "'"){
+                {}
+            }
+            else if(data[i] == ","){
+                list.push(increment)
+                increment = ""
+                counter = 0
+            }
+            else{
+                increment += data[i]
+            }
+        }
+        treatData.push(list);
+    };
+
+
+    //HERE WE TRAITING HTTPRESPONSE
+    function treatment_data_http(data){
+        treatment_data_http_step_ONE(data)
+        document.getElementById('test').innerHTML = treatData;
+    };
 
 
 
