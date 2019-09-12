@@ -488,7 +488,7 @@
         counter = 0
         //-----------------------------------variables
 
-    
+
         for(var i = 0; i < treatData.length; i++){
             for(var j = 0; j < treatData[i].length; j++){
 
@@ -643,7 +643,7 @@
           else{
               verification = no_data(data);
               if(verification == true){
-                document.getElementById("nos_data").innerHTML = "oops nous n'avons rien la dessus";
+                document.getElementById("nos_data").innerHTML = "oops nous n'avons rien la dessus <input type='button' value='Voir nos data' id='see_data'>";
                 loading_undisplay();
                 result_display(); // displaying text of result
               }
@@ -688,7 +688,7 @@
           else{
               verification = no_data(data);
               if(verification == true){
-                document.getElementById("nos_data").innerHTML = "oops nous n'avons rien la dessus";
+                document.getElementById("nos_data").innerHTML = "oops nous n'avons rien la dessus <input type='button' value='Voir nos data' id='see_data'>";
                 loading_undisplay();
                 result_display(); // displaying text of result
               }
