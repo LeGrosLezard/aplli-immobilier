@@ -59,23 +59,33 @@ def treatment_csv():
     with open(path, newline='') as csvfile:
         #We read it
         reader = csv.DictReader(csvfile)
-
+        c = 0
+        
         for row in reader:
+
+            
             #We only recup house and appartement
             if row['type_local'] in ("Maison", "Appartement") and\
                row['valeur_fonciere'] != "":
-                #Insertion into database
-                database(str(row['type_local']),
-                          int(row['valeur_fonciere']),
-                          int(row['nombre_pieces_principales']),
-                          int(row['surface_reelle_bati']),
-                          str(row['adresse_nom_voie']),
-                          str(row['adresse_suffixe']),
-                          str(row['code_postal']),
-                          str(row['nom_commune']),
-                          float(row['latitude']),
-                          float(row['longitude']))
-
+                c+=1
+                if c > 8308:
+                    #Insertion into database
+                    try:
+                        database(str(row['type_local']),
+                                  int(row['valeur_fonciere']),
+                                  int(row['nombre_pieces_principales']),
+                                  int(row['surface_reelle_bati']),
+                                  str(row['adresse_nom_voie']),
+                                  str(row['adresse_suffixe']),
+                                  str(row['code_postal']),
+                                  str(row['nom_commune']),
+                                  float(row['latitude']),
+                                  float(row['longitude']))
+                        
+                    except:
+                        pass
+                
+                
     print("data inserted; verify this:" +
           "/database/database_site/acces_to_database.py")
 
