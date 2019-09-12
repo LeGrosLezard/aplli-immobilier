@@ -26,6 +26,10 @@ en gros il faut:
   - avec une moyenne par le nombre de piece et le type (maison ou appartement)
    - faire une moyenne par recup des donnée
    
+  - si avant ce soir ok, faire selon le code postal tous les départements et faire des zones de prix
+    
+    - dire au détail si c'est vendu ou non par scrappage
+   
    
    - rendre le bas jolie
    
