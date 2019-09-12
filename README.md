@@ -5,7 +5,7 @@ l'utilisateur rentre une commune on dit le prix de l'appartement ou de la maison
 
 en gros il faut:
 
-  - scrappage python si on a pas de donnée <em><strong>(non)</strong></em>
+  - scrappage python si on a pas de donnée <em><strong>(en cours)</strong></em>
 
   - faire une auto complétion via la database <em><strong>(peut etre ok)</strong></em>
     - ca je sais pas encore mais si le type écrit un truk faire un like en ajax a chaque on saisit(ca va ramer donc au pire pas grave)
@@ -17,7 +17,7 @@ en gros il faut:
    - rendre le bas jolie <em><strong>(non)</strong></em>
    
    
-  - refaire la fonction
+  - refaire la fonction <em><strong>(en cours)</strong></em>
  
    
   - faire la doc 
