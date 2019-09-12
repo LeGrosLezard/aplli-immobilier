@@ -379,7 +379,15 @@
 
     //RECUP DATA FROM treatData TREATED
     function recup_data_ajax(){
+        //We have data from sql database
+        //it send us data.
+        //We treating it. First data = Price seconde = typeof structure(house/appart)
+        //thrid number of room and fourth the area space.
 
+        //We have two variable: The house and the appart.
+        //We need to do a mean of this
+
+        //-----------------------------------variables
         var len_maison = 0
         var maison = 0
         var len_appartement = 0
@@ -396,23 +404,25 @@
         var len_area_appart = 0
         var area_appart = 0
 
-
         var k_maison = false
         var k_appart = false
 
         var var_w = 0
         counter = 0
+        //-----------------------------------variables
 
+    
         for(var i = 0; i < treatData.length; i++){
             for(var j = 0; j < treatData[i].length; j++){
 
-                //PART OF LATITUDE AND LONGITUDE
+                //--------------------------------------------------PART OF LATITUDE AND LONGITUDE
                 lat_and_long(counter, treatData[i][j])
 
 
                 //DATA FOR PRICE OF IMMOVABLE
                 if(counter == 0){
                     var_w += parseInt(treatData[i][j])
+
                 }
                 if(counter == 1 && treatData[i][j] == " Maison"){
                     maison += var_w
@@ -427,7 +437,18 @@
                     k_appart = true
                 }
 
-                //NUMBER OF ROOM
+                //----------------------------------------------------NUMBER OF ROOMS
+                if(counter == 2){
+                    if(k_appart == true){
+                        len_room_appart += 1
+                        room_apart += parseInt(treatData[i][j])
+                    }
+                    else if(k_maison == true){
+                        len_room_house += 1
+                        room_house += parseInt(treatData[i][j])
+                    }
+                }
+                
                 if(counter == 2){
                     if(k_appart == true){
                         len_room_appart += 1
@@ -439,7 +460,8 @@
                     }
                 }
 
-                //AREA OF THE STRUCTURE
+
+                //------------------------------------------------AREA OF THE STRUCTURE
                 if(counter == 3){
                     if(k_appart == true){
                         len_area_appart += 1
@@ -453,7 +475,7 @@
                     }
                 }
 
-
+                //---------------------------------------------RE INIT COUNTER
                 if(counter == 9){
                     counter = -1
                     console.log("stoip")
@@ -463,6 +485,7 @@
             }
         }
 
+        //Now we displaying it !!
         document.getElementById("appartement_prix").innerHTML = Math.round(appartement/len_appartement) + " euros en moyenne"
         document.getElementById("maison_prix").innerHTML = Math.round(maison/len_maison) + " euros en moyenne"
 
@@ -479,6 +502,7 @@
     //HERE WE TRAITING HTTPRESPONSE
     function treatment_data_http(data){
         treatment_data_http_step_ONE(data)
+        document.getElementById('test').innerHTML = treatData;
     };
 
     function display_map_end_ajax(){
