@@ -33,6 +33,7 @@
                 <! -- MAP DIV -->
                 <div class="col-sm">
                     <div id="div_map"></div>
+                    <div id="map"></div>
                 </div>
 
                 <! -- RESULT DIV -->
@@ -43,7 +44,7 @@
                         <h2>Votre recherche, notre recherche <em><span id="logo_span">avec Axoo</span></em></h2>
 
                         <! -- TYPE OF INFRA -->
-                        <div class="row">
+                        <div class="row" id="infra">
                             <div class="col-sm">
                                 <input type="button" value="Maison" onclick="type_infra('maison')">
                             </div>
@@ -64,10 +65,10 @@
                             <h2>Adresse</h2>
                             <div class="row">
                                 <div class="col-sm">
-                                    <p>LOGO 1 prix appartement</p>
+                                    <p>LOGO 1 prix appartement</p><p id="appartement_prix"></p>
                                 </div>
                                 <div class="col-sm">
-                                    <p>LOGO 2 prix maison</p>
+                                    <p>LOGO 2 prix maison</p><p id="maison_prix"></p>
                                 </div>
                             </div>
 
@@ -162,6 +163,10 @@
     height:400px;
     background:url("/static/picture/home/house.jpg")
   }
+  #map{
+    height:400px;
+    display:none;
+  }
 
  /* ---------------------------------------------------DIV RESEARCH */
  #div_title{
@@ -226,6 +231,8 @@
     //***************************GLOBAL VAR********************************
     var varTypeInfra = "";
     var treatData = [];
+    lattitude_data = 0;
+    longitude_data = 0;
 
 
 
@@ -248,6 +255,8 @@
     $("#button_valid_search").on("click", function(e){
       var recup = recup_data(); // Recup value from input
       loading_display(); // displaying loading logo
+      raise_infra();//display infra inputs
+
       $.ajax({
         data:{
           'infra':varTypeInfra,
@@ -263,8 +272,10 @@
           else{
               loading_undisplay();
               raise_background(); // delete picture
-              treatment_data_http(data)
-              //initMap(lattitude_data, longitude_data); //put google map
+              treatment_data_http(data)//treat data from ajax return
+              recup_data_ajax()//recup lat and long data for google map
+              initMap(lattitude_data, longitude_data); //put google map
+              display_map_end_ajax()//Displaying map
               display_none_input_one(); // displaying none the first input
               result_display(); // displaying text of result
           };
@@ -307,14 +318,17 @@
         document.getElementById("div_map").style.display = "none";
     };
 
+    //WE RAISE INFRASTRUCTURE INPUTS
+    function raise_infra(){
+        document.getElementById("infra").style.display = "none";
+    }
+
     //*************************END AJAX CALL***************************
 
-    //FIRST PART OF ++++++++++treatment_data_http++++++++++
 
-    //we entrance it on an array
+    //WE ENTRANCE DATA FROM SQL INTO AN ARRAY
     function treatment_data_http_step_ONE(data){
-        console.log(data)
-        
+
         var increment = ""
         var list = []
         for(var i = 0; i < data.length + 1; i++){
@@ -334,19 +348,68 @@
     };
 
 
+    //RECUP DATA FROM treatData TREATED
+    function recup_data_ajax(){
+
+        var len_maison = 0;
+        var maison = 0;
+
+        var len_appartement = 0;
+        var appartement = 0;
+
+        var var_w = 0
+        counter = 0
+
+        for(var i = 0; i < treatData.length; i++){
+            for(var j = 0; j < treatData[i].length; j++){
+                if(counter == 9){
+                    lattitude_data = parseFloat(treatData[i][j])
+                }
+                if(counter == 10){
+                    longitude_data = parseFloat(treatData[i][j])
+                }
+                if(counter == 0){
+                    var_w += parseInt(treatData[i][j])
+                }
+                if(counter == 1 && treatData[i][j] == " Maison"){
+                    maison += var_w
+                    len_maison += 1
+                    var_w = 0
+                }
+                else if(counter == 1 && treatData[i][j] === " Appartement"){
+                    appartement += var_w
+                    len_appartement += 1
+                    var_w = 0
+                }
+            
+                if(counter == 10){
+                    counter = -1
+                }
+                counter += 1
+            }
+        }
+        console.log(maison/len_maison)
+    };
+    
+
     //HERE WE TRAITING HTTPRESPONSE
     function treatment_data_http(data){
         treatment_data_http_step_ONE(data)
         document.getElementById('test').innerHTML = treatData;
+
+
     };
+    function display_map_end_ajax(){
+        document.getElementById("map").style.display = "block";
+    };
+        
 
 
 
-    
     //*************************MAP INITIALISATION*************************
     function initMap(lattitude_data, longitude_data){
         var options = {
-            zoom:8,
+            zoom:15,
             center:{lat:lattitude_data, lng:longitude_data}
         }
         var map = new google.maps.Map(document.getElementById("map"), options);
