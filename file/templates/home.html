@@ -297,6 +297,16 @@
     
     //------------------------------------------------------------------UNDISPLAY
     //WE UNDISPLAY THE TEXT OF RESULT
+
+    function undsplay(div){
+      document.getElementById(div).style.display = "none";
+    };
+
+    function display(div){
+      document.getElementById(div).style.display = "block";
+    };
+
+    //-A EFFACER
     function result_undisplay(){
         document.getElementById("text_search").style.display = "none";
     };
@@ -331,14 +341,16 @@
         document.getElementById("infra").style.display = "none";
     }    
 
-
+    //-A EFFACER
 
     //*********************************AJAX FUNCTIONS********************************
     //AJAX CALL FOR MAP
     $("#button_valid_search").on("click", function(e){
+
       var recup = recup_data("entrance_address"); // Recup value from input
-      loading_display(); // displaying loading logo
-      raise_infra();//display infra inputs
+      display("loading") // displaying loading logo
+      undsplay("infra")//display infra inputs
+
       display_none_input_one()//display inputs + button
       $.ajax({
         data:{
@@ -355,19 +367,28 @@
           else{
               verification = no_data(data);
               if(verification == true){
-                loading_undisplay();
+                unidsplay("loading");
                 document.getElementById("nos_data").innerHTML = "oops nous n'avons rien la dessus <input type='button' value='Voir nos data' id='see_data'>";
                 result_display(); // displaying text of result
               }
               else{
-                  loading_undisplay(); 
-                  raise_background(); // delete picture
-                  treatment_data_http(data)// treat data from ajax return
-                  recup_data_ajax()// recup lat and long data for google map
-                  initMap(lattitude_data, longitude_data); // put google map
-                  display_map_end_ajax()// Displaying map
-                  display_none_input_one(); // displaying none the first input
-                  result_display(); // displaying text of result
+
+
+                display("loading") // displaying loading logo
+
+                undsplay("loading")//display infra inputs
+                undsplay("div_map")//elete picture
+                
+                undsplay("entrance_address")//Start input
+                undsplay("button_valid_search")//Start button
+                
+                display("map") // displaying map
+                display("text_search") // displaying text of result
+
+                treatment_data_http(data)// treat data from ajax return
+                recup_data_ajax()// recup lat and long data for google map
+                initMap(lattitude_data, longitude_data); // put google map
+  
             };
           };
       });
