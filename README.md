@@ -5,27 +5,12 @@ l'utilisateur rentre une commune on dit le prix de l'appartement ou de la maison
 
 en gros il faut:
 
-
-  - le mec saisit son code postal, <em><strong>(en cours)</strong></em>
-  
-    -si on en trouve un on dit ok sinon on va scrapper <em><strong>(non)</strong></em>
-
-  - on a pas beaucoup de data on sort ce que l'on <em><strong>(en cours)</strong></em>
-  
-    - par exemple gyé-sur-seine on a que 4 données. On dit sur le département en maison vaut 50 000 euro
-    
-    - on donne la possibilité de voir le prix value sur le code postal
+  - scrappage python si on a pas de donnée <em><strong>(non)</strong></em>
 
   - faire une auto complétion via la database <em><strong>(peut etre ok)</strong></em>
     - ca je sais pas encore mais si le type écrit un truk faire un like en ajax a chaque on saisit(ca va ramer donc au pire pas grave)
-    
-  - réponse google map <em><strong>(en cours)</strong></em>
-    - AJAX on récupere lat et long dans la database
+
   
-  - estimation du prix de la meme rue <em><strong>(en cours)</strong></em>
-    - on recupere avec un where et on dit le max et min ou direct avec sql
-    - si on a rien, on va directe scrappper l'info sur internet ce n'est pas a but lucratif donc légal
-    
   - avec une moyenne par le nombre de piece et le type (maison ou appartement) <em><strong>(en cours)</strong></em>
    - faire une moyenne par recup des donnée
    
