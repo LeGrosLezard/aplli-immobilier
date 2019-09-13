@@ -1,12 +1,13 @@
 # aplli-immobilier
 
-au pire mettre les deux versions une avec ce code l'aute avec jsonify
 
-chui diplomééééééééééééééééééééééééééééééé youhou
-
-en gros il faut:
-
+  - faire plus jolie le masthead
   
+  - quand on appuie sur commencez vers un href vers la seconde section
+  
+  - possibilité d'accéder directement vers la fonctionnalité
+  
+  - faire des sections ou on scroll et la ca affiche des truks
 
   - juste mettre les datas
   
