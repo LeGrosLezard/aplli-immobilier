@@ -1,4 +1,4 @@
-
+{% load static %}
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,21 +15,140 @@
         <! -- FIRST Section -->
         <section id="masthead">
             <div id="div_title">
-                <h1>La recherche immobiliaire <p><strong>Avec Jb</strong></p></h1>
-                <h2>Notre métier, notre passion n'attendez plus, faites-nous confiance</h2>
-                
+                <h1>La recherche immobiliaire</h1>
             </div>
+
+            <center>
+            
+              <h3 id="" style="margin-top:60px;font-family:segoe print;color:black;font-weight:bold;">
+                Notre métier, notre passion n'attendez plus, faites-nous confiance<br><br>
+              </h3>
+              
+              
+              <button type="button" class="btn btn-primary btn-lg" id=""
+                style="background:none;border:2px solid gray;font-color:black;margin-top:20px;margin-top:60px;"
+                onclick="">
+                <strong id="" style="color:black;font-weight:bold;">Commencer la visite</strong>
+              </button>
+
+            </center>
+
+            <h3 id="" style="margin-left:520px;font-size:2em;"><strong>Avec Jean-Baptiste</strong></h3>
+
         </section>
 
 
-        <! -- SECOND Section -->
-        <section id="recherche">
 
 
-            <! -- ONE column for map / ONE column for result of research -->
-            <div class="container">
-              <div class="row">
 
+
+
+
+
+
+
+        <section id="one_part" style="display:none;">
+        
+          <section id="" style="margin-top:50px;">
+
+              <div class="container">
+                  <div class="row">
+                    <div class="col-sm">
+                      <img src="/static/picture/home/1.jpg" id="" style="width:100%;">
+                    </div>
+                    <div class="col-sm" id="" style="font-size:2em;margin-top:20px;">
+                      Une recherche immobiliaire peut............
+                    </div>
+                  </div>
+              </div>
+          </section>
+              
+
+
+
+          <section id="information" style="margin-top:100px;">
+              <center>
+                <h1>N O S  &nbsp;&nbsp;&nbsp; I N F O R M A T I O N S </h1>
+
+                <div id="introduction">
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-sm">
+                          Qu'est qu'une valeur ......<br>
+                          aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                          aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                          aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                          aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                          aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                          aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                          aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                          aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                          aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                          aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                          aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                          aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                          aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<br>
+
+
+        
+                        </div>
+                        <div class="col-sm">
+                          Pourquoi utiliser <br>
+                          aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                          aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                          aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                          aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                          aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                          aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                          aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                          aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                          aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                          aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                          aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                          aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                          aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                          aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                          aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                          aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                          aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                          aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                          aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                          aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                          aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                          aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                          aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                          aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                          aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                          aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                        </div>
+                      </div>
+                    </div>
+              </center>
+          </section>
+
+
+
+
+
+
+
+
+            <img src="/static/picture/home/2.jpg" id="" style="width:300px;">
+            <img src="/static/picture/home/3.jpg" id="" style="width:300px;">
+            <img src="/static/picture/home/4.jpg" id="" style="width:300px;">
+            <img src="/static/picture/home/5.jpg" id="" style="width:300px;">
+
+
+
+
+
+
+
+
+
+          <center>
+            <! -- SECOND Section -->
+            <section id="recherche">
                 <! -- MAP DIV -->
                 <div class="col-sm">
                     <div id="div_map"></div>
@@ -37,79 +156,67 @@
                 </div>
 
                 <! -- RESULT DIV -->
-                <div class="col-sm">
+                <div>
+                    <! -- SEARCHING INPUT DIV -->
                     <div id="div_search">
 
-                        <! -- SEARCHING INPUT DIV -->
-                        <h1>Votre recherche, notre recherche <em><span id="logo_span">avec Jb</span></em></h1>
+                          <! -- TYPE OF INFRA -->
+                          <div class="row" id="infra">
+                              <div class="col-sm">
+                                  <img src="/static/picture/home/house.png" id="house"><br>
+                                  <input type="button" value="Maison" onclick="type_infra('maison')" class="input_infra">
+                              </div>
+                              <div class="col-sm">
+                                  <img src="/static/picture/home/appart.png" id="appart"><br>
+                                  <input type="button" value="Appartement" onclick="type_infra('appartement')" class="input_infra">
+                              </div>
+                          </div>
 
-                        <! -- TYPE OF INFRA -->
-                        <div class="row" id="infra">
-                            <div class="col-sm">
-                                <input type="button" value="Maison" onclick="type_infra('maison')" class="input_infra">
-                            </div>
-                            <div class="col-sm">
-                                <input type="button" value="Appartement" onclick="type_infra('appartement')" class="input_infra">
-                            </div>
-                        </div>
+                          <input type="text" placeholder="Votre recherche de commune..." id="entrance_address"><br>
+                          <button type="button" class="btn btn-primary" id="button_valid_search">Valider</button>
 
-                        <input type="text" placeholder="Votre recherche de commune..." id="entrance_address">bourg-en-bresse
-                        <button type="button" class="btn btn-primary" id="button_valid_search">Valider</button>
+                          <! -- LOADING DIV -->
+                          <div id="loading">
+                              <div><img src="/static/picture/home/loading.gif" id="loading_gif"></div>
+                              <div id="text_chargement"><em>C h a r g e m e n t</em></div>
+                          </div>
 
-                        <! -- LOADING DIV -->
-                        <div id="loading">
-                            <div><img src="/static/picture/home/loading.gif" id="loading_gif"></div>
-                            <div id="text_chargement"><em>C h a r g e m e n t</em></div>
-                        </div>
+                          <! -- TEXT RESULT -->
+                          <div id="text_search">
+                              <h2 id="dress"></h2>
+                              <div class="row" id="result_search">
+                                  <div class="col-sm">
+                                      <p><img src="/static/picture/home/appart.png" id="appart"></p>
+                                      <p id="appartement_prix"></p>
+                                      <p id="piece_appart"></p>
+                                      <p id="area_appart"></p>
+                                  </div>
+                                  <div class="col-sm">
+                                      <p> <img src="/static/picture/home/house.png" id="house"></p>
+                                      <p id="maison_prix"></p>
+                                      <p id="piece_maison"></p>
+                                      <p id="area_maison"></p>
+                                  </div>
+                              </div>
 
-                        <! -- TEXT RESULT -->
-                        <div id="text_search">
-                            <h2 id="dress"></h2>
-                            <div class="row" id="result_search">
-                                <div class="col-sm">
-                                    <p><img src="/static/picture/home/appart.png" id="appart"></p>
-                                    <p id="appartement_prix"></p>
-                                    <p id="piece_appart"></p>
-                                    <p id="area_appart"></p>
-                                </div>
-                                <div class="col-sm">
-                                    <p> <img src="/static/picture/home/house.png" id="house"></p>
-                                    <p id="maison_prix"></p>
-                                    <p id="piece_maison"></p>
-                                    <p id="area_maison"></p>
-                                </div>
-                            </div>
+                              <div id="nos_data"></div>
 
-                            <div id="nos_data"></div>
-
-                            <! -- SEARCHING INPUT DIV -->
-                            <div id="div_search2">
-                                <input type="text" placeholder="Votre recherche..." id="entrance_address2">
-                                <button type="button" class="btn btn-primary" id="button_valid_search2">Valider</button>
-                            </div>
-
-
-                        </div>
-                    </div>
-                    
-                  
+                              <! -- SEARCHING INPUT DIV -->
+                              <div id="div_search2">
+                                  <input type="text" placeholder="Votre recherche..." id="entrance_address2">
+                                  <button type="button" class="btn btn-primary" id="button_valid_search2">Valider</button>
+                              </div>
+                  </div>
                 </div>
               </div>
-            </div>
+            </center>
 
 
-            <div id="test"></div>
-
-
-
-
-        
-            
+          </section>
         </section>
-        <div>Icons made by <a href="https://www.flaticon.com/authors/nhor-phai" title="Nhor Phai">Nhor Phai</a> from <a href="https://www.flaticon.com/"title="Flaticon">www.flaticon.com</a></div>
-        <div>Icons made by <a href="https://www.flaticon.com/authors/dave-gandy" title="Dave Gandy">Dave Gandy</a> from <a href="https://www.flaticon.com/"             title="Flaticon">www.flaticon.com</a></div>
     </body>
 
+   
 
 
 
@@ -170,9 +277,23 @@
 
 
 
+  /* -------------------------------------------------------DESIGN */
+
+  #introduction{
+    font-size:1.2em;
+    margin-top:2.5em;
+    width: 100%;
+  }
+  #picture_intro{
+    width:60%;
+    margin-top:20px;
+  }
+
+
   /* -------------------------------------------------------DIV MAP */
   #div_map{
     height:400px;
+    width:60%;
     background:url("/static/picture/home/pic.jpg")
   }
   #map{
@@ -183,18 +304,20 @@
  /* ---------------------------------------------------DIV RESEARCH */
 
  #div_title{
-    margin-top:100px;
+    margin-top:0px;
   }
  #recherche{
     height:600px;
     margin-top:100px;
   }
   #div_search{
+    margin-top:5em;
     height:400px;
+    width:60%;
   }
   #entrance_address{
     margin-top:50px;
-    width:100%;
+    width:70%;
     text-align:center;
     height:7%;
     font-size:1.5em;
@@ -217,10 +340,10 @@
   .input_infra{
     background:none;
     border:none;
-    margin-top:100px;
     height:30px;
     font-weight:bold;
     font-size:1.6em;
+    margin-top:1em;
   }
   .input_infra:hover{
     background:none;
@@ -258,6 +381,11 @@
 
 
 <script>
+
+
+      //<div>Icons made by <a href="https://www.flaticon.com/authors/nhor-phai" title="Nhor Phai">Nhor Phai</a> from <a href="https://www.flaticon.com/"title="Flaticon">www.flaticon.com</a></div>
+      //<div>Icons made by <a href="https://www.flaticon.com/authors/dave-gandy" title="Dave Gandy">Dave Gandy</a> from <a href="https://www.flaticon.com/"             title="Flaticon">www.flaticon.com</a></div>
+      
 
     //***************************GLOBAL VAR*****************************************
     var varTypeInfra = "";
@@ -317,14 +445,6 @@
       counter = 0
 
     };
-
-
-
-
-
-
-
-
 
 
     //***************************USER PRESSED BUTTON********************************
@@ -627,12 +747,6 @@
 
 
 
-
-      
-
-
-
-
     //*************************DURING SECOND AJAX CALL***********************************
 
 
@@ -804,7 +918,6 @@
     });
     
 </script>
-
 
 
 
