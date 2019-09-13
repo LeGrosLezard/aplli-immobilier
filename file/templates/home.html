@@ -53,7 +53,7 @@
                             </div>
                         </div>
 
-                        <input type="text" placeholder="Votre recherche de commune..." id="entrance_address">
+                        <input type="text" placeholder="Votre recherche de commune..." id="entrance_address">bourg-en-bresse
                         <button type="button" class="btn btn-primary" id="button_valid_search">Valider</button>
 
                         <! -- LOADING DIV -->
@@ -265,6 +265,66 @@
     lattitude_data = 0;
     longitude_data = 0;
 
+    len_maison = 0
+    maison = 0
+    len_appartement = 0
+    appartement = 0
+
+    len_room_house = 0
+    room_house = 0
+
+    len_room_appart = 0
+    room_apart = 0
+
+    len_area_house = 0
+    area_house = 0
+    len_area_appart = 0
+    area_appart = 0
+
+    k_maison = false
+    k_appart = false
+
+    addresse_name = ""
+
+    var_w = 0
+    counter = 0
+
+
+    //RE INITIALIZATION OF GLOBAL
+    function empty_global(){
+      len_maison = 0
+      maison = 0
+      len_appartement = 0
+      appartement = 0
+
+      len_room_house = 0
+      room_house = 0
+
+      len_room_appart = 0
+      room_apart = 0
+
+      len_area_house = 0
+      area_house = 0
+      len_area_appart = 0
+      area_appart = 0
+
+      k_maison = false
+      k_appart = false
+
+      addresse_name = ""
+
+      var_w = 0
+      counter = 0
+
+    };
+
+
+
+
+
+
+
+
 
 
     //***************************USER PRESSED BUTTON********************************
@@ -282,76 +342,35 @@
 
 
     //*************************DURING AJAX CALL**************************************
-
-    //------------------------------------------------------------------DISPLAY
-    //WE DISPLAY THE TEXT OF RESULT
-    function result_display(){
-        document.getElementById("text_search").style.display = "block";
-    };
-
-
-    //WE DISPLAY THE LOATDING LOGO
-    function loading_display(){
-        document.getElementById("loading").style.display = "block";
-    };
-    
-    //------------------------------------------------------------------UNDISPLAY
-    //WE UNDISPLAY THE TEXT OF RESULT
-
-    function undsplay(div){
+    //UNDISPLAY FUNCTION
+    function undisplay(div){
       document.getElementById(div).style.display = "none";
     };
 
+    //DISPLAY FUNCTION
     function display(div){
       document.getElementById(div).style.display = "block";
     };
 
-    //-A EFFACER
-    function result_undisplay(){
-        document.getElementById("text_search").style.display = "none";
-    };
-    
-    //WE UNDISPLAY THE FIRST INPUT AND BUTTON
-    function display_none_input_one(){
-        document.getElementById("entrance_address").style.display = "none";
-        document.getElementById("button_valid_search").style.display = "none";
-    };
+    //FIRST PART OF AJAX
+    function first_part_AJAX_ONE(){
+      var recup = recup_data("entrance_address"); // Recup value from input
 
-    
-    //WE UNDISPLAY LOADING
-    function loading_undisplay(){
-        document.getElementById("loading").style.display = "none";
+      display("loading") // displaying loading logo
+      undisplay("infra")//display infra inputs
+      undisplay("entrance_address")//undisplay inputs search
+      undisplay("button_valid_search")//undisplay button search
+
+      return recup
     };
 
-    //WE DELETE GOOGLE MAP TO PICTURE
-    function put_background(){
-        //Raise the current div (background picture)
-        document.getElementById("div_map").style.display = "block";
-        document.getElementById("map").style.display = "none";
-    };
-
-    //WE DELETE PICTURE TO GOOGLE MAP
-    function raise_background(){
-        //Raise the current div (background picture)
-        document.getElementById("div_map").style.display = "none";
-    };
-
-    //WE RAISE INFRASTRUCTURE INPUTS
-    function raise_infra(){
-        document.getElementById("infra").style.display = "none";
-    }    
-
-    //-A EFFACER
 
     //*********************************AJAX FUNCTIONS********************************
     //AJAX CALL FOR MAP
     $("#button_valid_search").on("click", function(e){
 
-      var recup = recup_data("entrance_address"); // Recup value from input
-      display("loading") // displaying loading logo
-      undsplay("infra")//display infra inputs
+      recup = first_part_AJAX_ONE()
 
-      display_none_input_one()//display inputs + button
       $.ajax({
         data:{
           'infra':varTypeInfra,
@@ -367,28 +386,10 @@
           else{
               verification = no_data(data);
               if(verification == true){
-                unidsplay("loading");
-                document.getElementById("nos_data").innerHTML = "oops nous n'avons rien la dessus <input type='button' value='Voir nos data' id='see_data'>";
-                result_display(); // displaying text of result
+                no_data2()
               }
               else{
-
-
-                display("loading") // displaying loading logo
-
-                undsplay("loading")//display infra inputs
-                undsplay("div_map")//elete picture
-                
-                undsplay("entrance_address")//Start input
-                undsplay("button_valid_search")//Start button
-                
-                display("map") // displaying map
-                display("text_search") // displaying text of result
-
-                treatment_data_http(data)// treat data from ajax return
-                recup_data_ajax()// recup lat and long data for google map
-                initMap(lattitude_data, longitude_data); // put google map
-  
+                end_of_first_ajax_call(data);
             };
           };
       });
@@ -399,7 +400,8 @@
 
     //*************************END AJAX CALL*******************************************
 
-    //NO DATA
+                              //****NO DATA*****
+
     function no_data(data){
         if(data == "Oups nous n'avons pas donnée voir nos données ?"){
             return true
@@ -409,22 +411,66 @@
         }
     };
 
-    
-    //WE ENTRANCE DATA FROM SQL INTO AN ARRAY
-    function treatment_data_http_step_ONE(data){
+    function no_data2(){
+        undisplay("loading");
+        var text = "oops nous n'avons rien la dessus <input type='button' value='Voir nos data' id='see_data'>";
+        document.getElementById("nos_data").innerHTML = text;
+        display("text_search"); // displaying text of result
+        display("div_search2");
+    };
+
+
+
+                          //*****DATA*****
+
+
+    //MAP INITIALISATION
+    function initMap(lattitude_data, longitude_data){
+        var options = {
+            zoom:15,
+            center:{lat:lattitude_data, lng:longitude_data}
+        }
+        var map = new google.maps.Map(document.getElementById("map"), options);
+    };
+
+
+
+    //END FIRST CALL AJAX
+    function end_of_first_ajax_call(data){
+        display("loading") // displaying loading logo
+
+        undisplay("loading")//display infra inputs
+        undisplay("div_map")//elete picture
+        
+        undisplay("entrance_address")//Start input
+        undisplay("button_valid_search")//Start button
+        
+        display("map") // displaying map
+        display("text_search") // displaying text of result
+
+        treatment_data_http(data)// treat data from ajax return
+        recup_data_ajax()// recup lat and long data for google map
+        initMap(lattitude_data, longitude_data); // put google map
+
+    };
+
+
+
+    //**************************************TREATMENT DATA FROM VIEWS.PY**********************************
+
+    //WE ENTRANCE DATA FROM SQL INTO AN ARRAY ------------------------------------------> STEP 1
+    function treatment_data_http(data){
 
         var increment = ""
         var list = []
         for(var i = 0; i < data.length + 1; i++){
             if(data[i] == "[" || data[i] == "]" || data[i]  == "'"){
                 {}
-            }
-            else if(data[i] == ","){
+            }else if(data[i] == ","){
                 list.push(increment)
                 increment = ""
                 counter = 0
-            }
-            else{
+            }else{
                 increment += data[i]
             }
         }
@@ -432,10 +478,9 @@
     };
 
 
-    //PART OF LATITUDE AND LONGITUDE
-    function lat_and_long(counter, treatData){
-        
-        //DATA FOR LATTITUDE AND LONGITUDE
+    //PART 1 search lattitude and longitude ------------------------------------------> STEP 2.1
+    function recup_lat_and_long(counter, treatData){
+
         if(counter == 8){
             lattitude_data = parseFloat(treatData)
         }
@@ -445,8 +490,77 @@
     };
 
 
-    //WE DISPLAY THE RESULT WE GET -----------------------------------------> recup_data_ajax()
-    function display_result(appartement, len_appartement, maison, len_maison,
+    //PART 2 search price immovable ----------------------------------------------------> STEP2 2.2
+    function recup_price_immovable(counter, treatData){
+      
+      if(counter == 0){
+          var_w += parseInt(treatData)
+      }
+      if(counter == 1 && treatData == " Maison"){
+          maison += var_w
+          len_maison += 1
+          var_w = 0
+          k_maison = true
+      }else if(counter == 1 && treatData == " Appartement"){
+          appartement += var_w
+          len_appartement += 1
+          var_w = 0
+          k_appart = true
+      }
+    };
+
+
+
+    //PART 3 search area number of room  ----------------------------------------------------> STEP2 2.3
+    function number_room(counter, treatData){
+      if(counter == 2){
+          if(k_appart == true){
+              len_room_appart += 1
+              room_apart += parseInt(treatData)
+          }else if(k_maison == true){
+              len_room_house += 1
+              room_house += parseInt(treatData)
+          }
+      }
+      if(counter == 2){
+          if(k_appart == true){
+              len_room_appart += 1
+              room_apart += parseInt(treatData)
+          }else if(k_maison == true){
+              len_room_house += 1
+              room_house += parseInt(treatData)
+          }
+       }
+
+    };
+
+
+    //PART 4 search area immovable  -----------------------------------------------------------> STEP2 2.4
+    function area_immovable(counter, treatData){
+      if(counter == 3){
+          if(k_appart == true){
+              len_area_appart += 1
+              area_appart += parseInt(treatData)
+              k_appart = false
+          }else if(k_maison == true){
+              len_area_house += 1
+              area_house += parseInt(treatData)
+              k_maison = false
+          }
+       }
+    };
+
+
+    //PART 5 search addresse ----------------------------------------------------------------------> STEP2 2.5
+    function addresse_name_situation(counter, treatData){
+        if(counter == 7){
+          addresse_name = treatData
+      }
+    };
+
+
+    //WE DISPLAY THE RESULT WE GET -----------------------------------------------------------------> STEP2 2.6
+    function display_result_under_logo_house(appartement, len_appartement, maison, len_maison,
                             room_apart, len_room_appart, room_house, len_room_house,
                             area_appart, len_area_appart, area_house, len_area_house,
                             addresse_name){
@@ -472,183 +586,99 @@
 
 
 
-    //RECUP DATA FROM treatData TREATED ---------------------------> recup_data_ajax()
+    //RECUP DATA FROM treatData TREATED -----------------------------------------------------------> STEP 3 
     function recup_data_ajax(){
-        //We have data from sql database
-        //it send us data.
-        //We treating it. First data = Price seconde = typeof structure(house/appart)
-        //thrid number of room and fourth the area space.
-
-        //We have two variable: The house and the appart.
-        //We need to do a mean of this
-
-
-        //-----------------------------------variables
-        var len_maison = 0
-        var maison = 0
-        var len_appartement = 0
-        var appartement = 0
-
-        var len_room_house = 0
-        var room_house = 0
-
-        var len_room_appart = 0
-        var room_apart = 0
-
-        var len_area_house = 0
-        var area_house = 0
-        var len_area_appart = 0
-        var area_appart = 0
-
-        var k_maison = false
-        var k_appart = false
-
-        var addresse_name = ""
-
-        var var_w = 0
-        counter = 0
-        //-----------------------------------variables
-
 
         for(var i = 0; i < treatData.length; i++){
             for(var j = 0; j < treatData[i].length; j++){
 
-                //--------------------------------------------------PART OF LATITUDE AND LONGITUDE****** COUNT == 0
-                lat_and_long(counter, treatData[i][j])
+                //part of lattitude and longitude where COUNT = 0
+                recup_lat_and_long(counter, treatData[i][j])
 
+                //part of price where COUNT = 1
+                recup_price_immovable(counter, treatData[i][j])
 
-                //DATA FOR PRICE OF IMMOVABLE
-                if(counter == 0){
-                    var_w += parseInt(treatData[i][j])
+                //part of number of room where COUNT = 2
+                number_room(counter, treatData[i][j])
 
-                }
-                if(counter == 1 && treatData[i][j] == " Maison"){
-                    maison += var_w
-                    len_maison += 1
-                    var_w = 0
-                    k_maison = true
-                }
-                else if(counter == 1 && treatData[i][j] == " Appartement"){
-                    appartement += var_w
-                    len_appartement += 1
-                    var_w = 0
-                    k_appart = true
-                }
+                //part of room where COUNT = 3
+                area_immovable(counter, treatData[i][j])
 
-                //------------------------------------------------------NUMBER OF ROOMS****** COUNT == 2
-                if(counter == 2){
-                    if(k_appart == true){
-                        len_room_appart += 1
-                        room_apart += parseInt(treatData[i][j])
-                    }
-                    else if(k_maison == true){
-                        len_room_house += 1
-                        room_house += parseInt(treatData[i][j])
-                    }
-                }
+                //part of addresse name where COUNT = 7
+                addresse_name_situation(counter, treatData[i][j])
 
-                if(counter == 2){
-                    if(k_appart == true){
-                        len_room_appart += 1
-                        room_apart += parseInt(treatData[i][j])
-                    }
-                    else if(k_maison == true){
-                        len_room_house += 1
-                        room_house += parseInt(treatData[i][j])
-                    }
-                }
-
-
-                //------------------------------------------------AREA OF THE STRUCTURE****** COUNT == 3
-                if(counter == 3){
-                    if(k_appart == true){
-                        len_area_appart += 1
-                        area_appart += parseInt(treatData[i][j])
-                        k_appart = false
-                    }
-                    else if(k_maison == true){
-                        len_area_house += 1
-                        area_house += parseInt(treatData[i][j])
-                        k_maison = false
-                    }
-                }
-
-                //------------------------------------------------AREA OF THE STRUCTURE****** COUNT == 7
-                if(counter == 7){
-                    addresse_name = treatData[i][j]
-                }
-
-
-                //---------------------------------------------RE INIT COUNTER****** COUNT == 9
+              
+                //We empty to -1 the counter where COUNTER = 9
                 if(counter == 9){
                     counter = -1
-                    console.log("stoip")
                 }
                 counter += 1
             }
         }
 
         //Now we displaying it !!
-        display_result(appartement, len_appartement, maison, len_maison,
-                        room_apart, len_room_appart, room_house, len_room_house,
-                        area_appart, len_area_appart, area_house, len_area_house,
-                        addresse_name);
-        
-    };
-
-
-    //HERE WE TRAITING HTTPRESPONSE
-    function treatment_data_http(data){
-        treatment_data_http_step_ONE(data)
-    };
-
-    function display_map_end_ajax(){
-        document.getElementById("map").style.display = "block";
-    };
-        
-
-
-
-    //*************************MAP INITIALISATION***********************************
-    function initMap(lattitude_data, longitude_data){
-        var options = {
-            zoom:15,
-            center:{lat:lattitude_data, lng:longitude_data}
-        }
-        var map = new google.maps.Map(document.getElementById("map"), options);
+        display_result_under_logo_house(appartement, len_appartement, maison, len_maison,
+                                        room_apart, len_room_appart, room_house, len_room_house,
+                                        area_appart, len_area_appart, area_house, len_area_house,
+                                        addresse_name);
     };
 
 
 
+
+
+
+      
+
+
+
+
+    //*************************DURING SECOND AJAX CALL***********************************
+
+
+    //UNINDISPLAY LAST RESULT
+    function unindisplay_last_result(){
+        document.getElementById("appartement_prix").innerHTML = "";
+        document.getElementById("maison_prix").innerHTML = "";
+        document.getElementById("piece_appart").innerHTML = "";
+        document.getElementById("piece_maison").innerHTML = ""
+        document.getElementById("area_appart").innerHTML = "";
+        document.getElementById("area_maison").innerHTML = "";
+        document.getElementById("dress").innerHTML = "";
+    };
+
+
+    //FIRST PART SECOND AJAX CALL
+    function first_part_AJAX_TWO(){
+      
+      treatData = [] //Raise the array who contains data
+      var recup = recup_data("entrance_address2"); // Recup value from input
+    
+      undisplay("text_search"); 
+      undisplay("div_search2");//undisplay input and button of second search
+      undisplay("map"); // displaying loading logo
+
+      unindisplay_last_result();
+      empty_global();
+
+      display("loading"); // displaying loading logo
+      display("div_map")
+
+      
+      document.getElementById("nos_data").innerHTML = ""
+
+      return recup
+    };
 
 
 
 
     //*************************SECOND CALL AJAX***********************************
-    //UNINDISPLAY RESULT
-    function unindisplay_last_result(){
-        document.getElementById("appartement_prix").innerHTML = "";
-        document.getElementById("maison_prix").innerHTML = "";
-
-        document.getElementById("piece_appart").innerHTML = "";
-        document.getElementById("piece_maison").innerHTML = ""
-
-        document.getElementById("area_appart").innerHTML = "";
-        document.getElementById("area_maison").innerHTML = "";
-        document.getElementById("dress").innerHTML = "";
-
-    }
-
-    
     //AJAX CALL THE SECOND INPUT
     $("#button_valid_search2").on("click", function(e){
-      treatData = []
-      unindisplay_last_result()//we delete last div
-      var recup = recup_data("entrance_address2"); // Recup value from input
-      loading_display(); // displaying loading logo
-      raise_infra();//display infra inputs
-      put_background()//re put picture instead google map
-      result_undisplay() // delete result
+
+      recup = first_part_AJAX_TWO()
+
       $.ajax({
         data:{
           'infra':varTypeInfra,
@@ -664,19 +694,10 @@
           else{
               verification = no_data(data);
               if(verification == true){
-                document.getElementById("nos_data").innerHTML = "oops nous n'avons rien la dessus <input type='button' value='Voir nos data' id='see_data'>";
-                loading_undisplay();
-                result_display(); // displaying text of result
+                no_data2()
               }
               else{
-                  loading_undisplay();
-                  raise_background(); // delete picture
-                  treatment_data_http(data)// treat data from ajax return
-                  recup_data_ajax()// recup lat and long data for google map
-                  initMap(lattitude_data, longitude_data); // put google map
-                  display_map_end_ajax()// Displaying map
-                  display_none_input_one(); // displaying none the first input
-                  result_display(); // displaying text of result
+                end_of_SECOND_AJAX_CALL_END(data);
             };
           };
       });
@@ -685,15 +706,30 @@
 
 
 
-    //*************************NO DATA CALL AJAX***********************************
-    //AJAX CALL THE SECOND INPUT
+    //*******************************END SECOND AJAX CALL***********************************
+
+    function end_of_SECOND_AJAX_CALL_END(data){
+        undisplay("loading"); // displaying loading logo
+        undisplay("div_map");//undisplay input and button of second search
+
+        display("map");//undisplay input and button of second search
+        display("text_search"); // displaying text of result
+        display("div_search2");
+
+        treatment_data_http(data)// treat data from ajax return
+        recup_data_ajax()// recup lat and long data for google map
+        initMap(lattitude_data, longitude_data); // put google map
+    }
+
+
+
+
+    //****************************NO DATA AJAX CALL***********************************
+
     $("#button_valid_search2").on("click", function(e){
-      treatData = []
-      var recup = recup_data("entrance_address2"); // Recup value from input
-      loading_display(); // displaying loading logo
-      raise_infra();//display infra inputs
-      put_background()//re put picture instead google map
-      result_undisplay() // delete result
+
+      recup = first_part_AJAX_TWO()
+
       $.ajax({
         data:{
           'infra':varTypeInfra,
@@ -709,19 +745,10 @@
           else{
               verification = no_data(data);
               if(verification == true){
-                document.getElementById("nos_data").innerHTML = "oops nous n'avons rien la dessus <input type='button' value='Voir nos data' id='see_data'>";
-                loading_undisplay();
-                result_display(); // displaying text of result
+                no_data2()
               }
               else{
-                  loading_undisplay();
-                  raise_background(); // delete picture
-                  treatment_data_http(data)// treat data from ajax return
-                  recup_data_ajax()// recup lat and long data for google map
-                  initMap(lattitude_data, longitude_data); // put google map
-                  display_map_end_ajax()// Displaying map
-                  display_none_input_one(); // displaying none the first input
-                  result_display(); // displaying text of result
+                  end_of_SECOND_AJAX_CALL_END(data);
             };
           };
       });
