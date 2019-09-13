@@ -2,6 +2,8 @@
 
 au pire mettre les deux versions une avec ce code l'aute avec jsonify
 
+chui diplomééééééééééééééééééééééééééééééé youhou
+
 en gros il faut:
 
   
