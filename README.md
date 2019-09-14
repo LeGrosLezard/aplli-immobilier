@@ -1,6 +1,5 @@
 # aplli-immobilier
 
-jvai le faire jvai apprendre mais ca va etre comme l'interim la ptin mais on code pas la dedans
 
 
   - faire plus jolie le masthead
