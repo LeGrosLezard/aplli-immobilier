@@ -42,10 +42,8 @@
 
 
 
-
-
-        
-          <section id="" style="margin-top:50px;">
+          <section id="immovable_presentation"
+                   style="margin-top:50px;visibility:hidden;height:300px;">
 
               <div class="container">
                   <div class="row">
@@ -62,7 +60,8 @@
 
 
 
-          <section id="information" style="margin-top:100px;">
+
+          <section id="information" style="margin-top:100px;visibility:hidden;">
               <center>
                 <h1>N O S  &nbsp;&nbsp;&nbsp; I N F O R M A T I O N S </h1> comme synrego
 
@@ -903,6 +902,55 @@
             }
         }
     });
+
+
+
+    //********************************ESTHETIC FUNCTIONS***************************
+
+
+    //***********GLOBAL VARIABLE***********
+    sec_one = find_pos_div("immovable_presentation");
+    sec_two = find_pos_div("information");
+
+
+    //***********POSITION OF DIV FUNCTIONS***********
+
+    //function who find pos of div
+    function find_pos_div(our_div){
+      var Y = document.getElementById(our_div).offsetTop;
+      //alert(Y)
+      return Y
+    };
+
+    //display function
+    function display_design(div){
+      document.getElementById(div).style.visibility = "visible";
+    };
+
+    //On scroll do something
+    $(window).scroll(function() {
+
+      var position = $(window).scrollTop()
+
+      if(position > sec_one - 100){
+        setInterval(display_design("immovable_presentation"), 4000)
+      }
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     
 </script>
 
