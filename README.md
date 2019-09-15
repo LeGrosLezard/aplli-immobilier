@@ -1,24 +1,12 @@
 # aplli-immobilier
 
+  - 1) faire et apprendre prestashop... en vrai ca doit etre trop bien mais je comprend rien... jve modifier le texte d'un bouton jpe pas... c horrible
 
+  - 2) finir eyes detector
+  
+  <br><br><br><br><br><br><br><br><br><br><br>
 
-  - faire plus jolie le masthead
-  
-  - quand on appuie sur commencez vers un href vers la seconde section
-  
-  - possibilité d'accéder directement vers la fonctionnalité
-  
-  - faire des sections ou on scroll et la ca affiche des truks
-
-  - juste mettre les datas
-  
-    - oops nous navons rien trouvé, voir les data: 
-    - mettre nos data par code postal
-    - ranger le code mieux le faire enfete -> faut un json repsonse grrrrrrr
-   
-   
-   - rendre le bas jolie <em><strong>(non)</strong></em>
-   
+  - faire les textes 
    
   - faire la doc 
     - installation (csv, gzip ...)
