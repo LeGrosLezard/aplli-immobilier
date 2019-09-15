@@ -4,6 +4,10 @@
 
   - 2) finir eyes detector
   
+  - 50) faire area head detector
+
+  - 51) dlib pour émotion
+
   <br><br><br><br><br><br><br><br><br><br><br>
 
   - faire les textes 
